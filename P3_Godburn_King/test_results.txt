@@ -1,0 +1,280 @@
+=== ls -la of testdir ===
+total 36
+drwxr-xr-x 3 ryan ryan 4096 Feb 14 17:16 .
+drwxr-xr-x 3 ryan ryan 4096 Feb 14 17:16 ..
+-rw-r--r-- 1 ryan ryan 5120 Feb 14 17:16 bigfile.bin
+-rw-r--r-- 2 ryan ryan    6 Feb 14 17:16 file1.txt
+-rw-r--r-- 1 ryan ryan   27 Feb 14 17:16 file2.txt
+-rw-r--r-- 1 ryan ryan    6 Feb 14 17:16 file3.txt
+-rw-r--r-- 2 ryan ryan    6 Feb 14 17:16 hardlink1.txt
+lrwxrwxrwx 1 ryan ryan    9 Feb 14 17:16 softlink1.txt -> file2.txt
+drwxr-xr-x 2 ryan ryan 4096 Feb 14 17:16 subdir
+
+=== Test 1: Default run ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Sat Feb 14 2026	17:16:07
+----------------------------------------------------------------
+Welcome to P3: Sweeper
+------- Sweeper Settings -------
+Start at:     /home/ryan/Program3/testdir
+Output file:  (stdout)
+Verbose?      No
+Ignore case?  No
+Min file size: 1
+----------------------------
+
+Processing directory: /home/ryan/Program3/testdir
+Done processing: /home/ryan/Program3/testdir
+
+--- File List (5 files) ---
+     iNode	Pathname
+     -----	--------
+    196740	/home/ryan/Program3/testdir/file3.txt
+    196737	/home/ryan/Program3/testdir/hardlink1.txt
+    196739	/home/ryan/Program3/testdir/file2.txt
+    196741	/home/ryan/Program3/testdir/bigfile.bin
+    196737	/home/ryan/Program3/testdir/file1.txt
+--- End of File List ---
+
+Normal termination.
+
+=== Test 2: Verbose ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Sat Feb 14 2026	17:16:07
+----------------------------------------------------------------
+Welcome to P3: Sweeper
+------- Sweeper Settings -------
+Start at:     /home/ryan/Program3/testdir
+Output file:  (stdout)
+Verbose?      Yes
+Ignore case?  No
+Min file size: 1
+----------------------------
+
+Processing directory: /home/ryan/Program3/testdir
+  REG     196740  file3.txt
+  REG     196737  hardlink1.txt
+  REG     196739  file2.txt
+  DIR     196736  subdir
+  REG     196741  bigfile.bin
+  REG     196737  file1.txt
+Done processing: /home/ryan/Program3/testdir
+
+--- File List (5 files) ---
+     iNode	Pathname
+     -----	--------
+    196740	/home/ryan/Program3/testdir/file3.txt
+    196737	/home/ryan/Program3/testdir/hardlink1.txt
+    196739	/home/ryan/Program3/testdir/file2.txt
+    196741	/home/ryan/Program3/testdir/bigfile.bin
+    196737	/home/ryan/Program3/testdir/file1.txt
+--- End of File List ---
+
+Normal termination.
+
+=== Test 3: Help flag ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Sat Feb 14 2026	17:16:07
+----------------------------------------------------------------
+Welcome to P3: Sweeper
+Usage: sweeper [options]
+
+Options:
+  -v, --verbose       Print names of all files and
+                      directories opened.
+  -h, --help          Display this help message.
+  -o, --output <file> Write output to the named
+                      file.
+  -d <path>           Start searching in the
+                      given directory.
+                      (Default: current directory)
+      --size <n>      Only process files of at
+                      least n bytes.
+      --ignore-case   Ignore case when comparing
+                      file names.
+
+
+=== Test 4: Output file ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Sat Feb 14 2026	17:16:07
+----------------------------------------------------------------
+Welcome to P3: Sweeper
+
+Normal termination.
+(Sweeper output written to out.txt):
+------- Sweeper Settings -------
+Start at:     /home/ryan/Program3/testdir
+Output file:  out.txt
+Verbose?      Yes
+Ignore case?  No
+Min file size: 1
+----------------------------
+
+Processing directory: /home/ryan/Program3/testdir
+  REG     196740  file3.txt
+  REG     196737  hardlink1.txt
+  REG     196739  file2.txt
+  REG     209097  out.txt
+  DIR     196736  subdir
+  REG     196741  bigfile.bin
+  REG     196737  file1.txt
+Done processing: /home/ryan/Program3/testdir
+
+--- File List (6 files) ---
+     iNode	Pathname
+     -----	--------
+    196740	/home/ryan/Program3/testdir/file3.txt
+    196737	/home/ryan/Program3/testdir/hardlink1.txt
+    196739	/home/ryan/Program3/testdir/file2.txt
+    209097	/home/ryan/Program3/testdir/out.txt
+    196741	/home/ryan/Program3/testdir/bigfile.bin
+    196737	/home/ryan/Program3/testdir/file1.txt
+--- End of File List ---
+
+=== Test 5: --size 100 ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Sat Feb 14 2026	17:16:07
+----------------------------------------------------------------
+Welcome to P3: Sweeper
+------- Sweeper Settings -------
+Start at:     /home/ryan/Program3/testdir
+Output file:  (stdout)
+Verbose?      Yes
+Ignore case?  No
+Min file size: 100
+----------------------------
+
+Processing directory: /home/ryan/Program3/testdir
+  REG     196740  file3.txt
+  REG     196737  hardlink1.txt
+  REG     196739  file2.txt
+  DIR     196736  subdir
+  REG     196741  bigfile.bin
+  REG     196737  file1.txt
+Done processing: /home/ryan/Program3/testdir
+
+--- File List (1 files) ---
+     iNode	Pathname
+     -----	--------
+    196741	/home/ryan/Program3/testdir/bigfile.bin
+--- End of File List ---
+
+Normal termination.
+
+=== Test 6: --ignore-case ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Sat Feb 14 2026	17:16:07
+----------------------------------------------------------------
+Welcome to P3: Sweeper
+------- Sweeper Settings -------
+Start at:     /home/ryan/Program3/testdir
+Output file:  (stdout)
+Verbose?      Yes
+Ignore case?  Yes
+Min file size: 1
+----------------------------
+
+Processing directory: /home/ryan/Program3/testdir
+  REG     196740  file3.txt
+  REG     196737  hardlink1.txt
+  REG     196739  file2.txt
+  DIR     196736  subdir
+  REG     196741  bigfile.bin
+  REG     196737  file1.txt
+Done processing: /home/ryan/Program3/testdir
+
+--- File List (5 files) ---
+     iNode	Pathname
+     -----	--------
+    196740	/home/ryan/Program3/testdir/file3.txt
+    196737	/home/ryan/Program3/testdir/hardlink1.txt
+    196739	/home/ryan/Program3/testdir/file2.txt
+    196741	/home/ryan/Program3/testdir/bigfile.bin
+    196737	/home/ryan/Program3/testdir/file1.txt
+--- End of File List ---
+
+Normal termination.
+
+=== Test 7: Current directory ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Sat Feb 14 2026	17:16:07
+----------------------------------------------------------------
+Welcome to P3: Sweeper
+------- Sweeper Settings -------
+Start at:     /home/ryan/Program3
+Output file:  (stdout)
+Verbose?      No
+Ignore case?  No
+Min file size: 1
+----------------------------
+
+Processing directory: /home/ryan/Program3
+Done processing: /home/ryan/Program3
+
+--- File List (39 files) ---
+     iNode	Pathname
+     -----	--------
+    196725	/home/ryan/Program3/tools.hpp
+    196692	/home/ryan/Program3/main.cpp
+    196721	/home/ryan/Program3/testingScript.sh
+    196680	/home/ryan/Program3/Direntry.cpp:Zone.Identifier
+    196690	/home/ryan/Program3/FileID.hpp
+    196733	/home/ryan/Program3/Stats.o
+    196704	/home/ryan/Program3/Params.hpp:Zone.Identifier
+    196699	/home/ryan/Program3/Makefile
+    196708	/home/ryan/Program3/Stats.hpp:Zone.Identifier
+    196687	/home/ryan/Program3/Direntry.hpp:Zone.Identifier
+    196724	/home/ryan/Program3/tools.cpp:Zone.Identifier
+    196722	/home/ryan/Program3/testingScript.sh:Zone.Identifier
+    196731	/home/ryan/Program3/Sweeper.o
+    196729	/home/ryan/Program3/main.o
+    196726	/home/ryan/Program3/tools.hpp:Zone.Identifier
+    196702	/home/ryan/Program3/Params.cpp:Zone.Identifier
+    208483	/home/ryan/Program3/test_results.txt
+    196679	/home/ryan/Program3/Direntry.cpp
+    196720	/home/ryan/Program3/Sweeper.hpp:Zone.Identifier
+    196691	/home/ryan/Program3/FileID.hpp:Zone.Identifier
+    196723	/home/ryan/Program3/tools.cpp
+    196709	/home/ryan/Program3/Sweeper.cpp
+    196707	/home/ryan/Program3/Stats.hpp
+    196705	/home/ryan/Program3/Stats.cpp
+    196730	/home/ryan/Program3/Params.o
+    196688	/home/ryan/Program3/FileID.cpp
+    196711	/home/ryan/Program3/Sweeper.hpp
+    196701	/home/ryan/Program3/Params.cpp
+    196738	/home/ryan/Program3/sweeper
+    196735	/home/ryan/Program3/tools.o
+    196681	/home/ryan/Program3/Direntry.hpp
+    196693	/home/ryan/Program3/main.cpp:Zone.Identifier
+    196689	/home/ryan/Program3/FileID.cpp:Zone.Identifier
+    196706	/home/ryan/Program3/Stats.cpp:Zone.Identifier
+    196700	/home/ryan/Program3/Makefile:Zone.Identifier
+    196703	/home/ryan/Program3/Params.hpp
+    196734	/home/ryan/Program3/Direntry.o
+    196710	/home/ryan/Program3/Sweeper.cpp:Zone.Identifier
+    196732	/home/ryan/Program3/FileID.o
+--- End of File List ---
+
+Normal termination.
+

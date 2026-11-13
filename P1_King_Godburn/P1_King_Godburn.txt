@@ -1,0 +1,39 @@
+total 28
+-rwxr-xr-x 1 ryan ryan 17264 Feb  1 14:40 P1_King_Godburn
+-rw-r--r-- 1 ryan ryan     0 Feb  1 14:40 P1_King_Godburn.txt
+-rw-r--r-- 1 ryan ryan     0 Feb  1 14:40 file1.bak
+-rw-r--r-- 1 ryan ryan     0 Feb  1 14:40 file2.bak
+-rw-r--r-- 1 ryan ryan     0 Feb  1 14:40 file3.bak
+-rw-r--r-- 1 ryan ryan  2286 Feb  1 14:39 main.cpp
+-rw-r--r-- 1 ryan ryan    25 Feb  1 14:39 main.cpp:Zone.Identifier
+-----------------------------------
+command ./P1_King_Godburn
+-----------------------------------
+command ./P1_King_Godburn
+switch o
+argument myCommand
+argument myMain.cpp
+argument myClass.cpp
+-----------------------------------
+command ./P1_King_Godburn
+argument w/java
+argument bash-3.2
+argument ls
+switch l
+-----------------------------------
+command ./P1_King_Godburn
+switch au
+switch -verbose
+argument w/java/
+argument kira:w/java/
+-----------------------------------
+command ./P1_King_Godburn
+switch i
+argument CSCI 6657
+argument *.html
+-----------------------------------
+command ./P1_King_Godburn
+argument file1.bak
+argument file2.bak
+argument file3.bak
+argument *.log

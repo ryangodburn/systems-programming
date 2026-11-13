@@ -1,0 +1,7 @@
+------- Sweeper Settings -------
+Start at:     /home/ryan/Program2
+Output file:  found.txt
+Verbose?      No
+Ignore case?  No
+Min file size: 1
+----------------------------

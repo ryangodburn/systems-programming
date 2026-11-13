@@ -1,0 +1,651 @@
+=== Test 1: No arguments (usage) ===
+Command: ./mom
+
+usage: ./mom numKids
+
+-------------------------------
+
+=== Test 2: 0 kids (error) ===
+Command: ./mom 0
+
+Number of kids must be between 2 and 25
+
+-------------------------------
+
+=== Test 3: 1 kid (error) ===
+Command: ./mom 1
+
+Number of kids must be between 2 and 25
+
+-------------------------------
+
+=== Test 4: 3 kids (full output) ===
+Kids: alice bob charlie
+
+--- Mom's Output ---
+Mom: waiting for 3 kids on port 1234...
+Mom: kid 0 connected
+Mom: kid 1 connected
+Mom: kid 2 connected
+Mom: kid 0 says HELLO, name=charlie
+Mom: kid 1 says HELLO, name=bob
+Mom: kid 2 says HELLO, name=alice
+
+=== New Round: 3 kids, 2 chairs ===
+Mom -> charlie: GETUP 2
+Mom -> bob: GETUP 2
+Mom -> alice: GETUP 2
+Mom -> charlie: SIT
+Mom -> bob: SIT
+Mom -> alice: SIT
+Mom <- charlie: WANT 0
+Mom -> charlie: ACK
+Mom <- bob: WANT 0
+Mom -> bob: NACK 01
+Mom <- alice: WANT 0
+Mom -> alice: NACK 01
+Mom <- bob: WANT 1
+Mom -> bob: ACK
+Mom <- alice: WANT 1
+Mom -> alice: QUIT
+
+=== New Round: 2 kids, 1 chairs ===
+Mom -> charlie: GETUP 1
+Mom -> bob: GETUP 1
+Mom -> charlie: SIT
+Mom -> bob: SIT
+Mom <- charlie: WANT 0
+Mom -> charlie: ACK
+Mom <- bob: WANT 0
+Mom -> bob: QUIT
+Mom -> charlie: PRIZE
+Mom: game over
+
+--- alice's Output ---
+alice: connected to mom at localhost on port 1234
+alice -> Mom: HELLO alice
+State = NEWBIE,  Command is: GETUP
+alice: marching, chairs=2
+State = MARCHING,  Command is: SIT
+alice -> Mom: WANT 0
+State = SEEKING,  Command is: NACK
+alice: NACK received, available=01
+alice: retrying chair 1
+alice -> Mom: WANT 1
+State = SEEKING,  Command is: QUIT
+alice: I lost :(
+
+--- bob's Output ---
+bob: connected to mom at localhost on port 1234
+bob -> Mom: HELLO bob
+State = NEWBIE,  Command is: GETUP
+bob: marching, chairs=2
+State = MARCHING,  Command is: SIT
+bob -> Mom: WANT 0
+State = SEEKING,  Command is: NACK
+bob: NACK received, available=01
+bob: retrying chair 1
+bob -> Mom: WANT 1
+State = SEEKING,  Command is: ACK
+bob: got a chair!
+State = SITTING,  Command is: GETUP
+bob: marching, chairs=1
+State = MARCHING,  Command is: SIT
+bob -> Mom: WANT 0
+State = SEEKING,  Command is: QUIT
+bob: I lost :(
+
+--- charlie's Output ---
+charlie: connected to mom at localhost on port 1234
+charlie -> Mom: HELLO charlie
+State = NEWBIE,  Command is: GETUP
+charlie: marching, chairs=2
+State = MARCHING,  Command is: SIT
+charlie -> Mom: WANT 0
+State = SEEKING,  Command is: ACK
+charlie: got a chair!
+State = SITTING,  Command is: GETUP
+charlie: marching, chairs=1
+State = MARCHING,  Command is: SIT
+charlie -> Mom: WANT 0
+State = SEEKING,  Command is: ACK
+charlie: got a chair!
+State = SITTING,  Command is: PRIZE
+charlie: I WON THE GAME!
+
+-------------------------------
+
+=== Test 5: 10 kids (Mom only) ===
+Kids: alice bob charlie diana edward fiona george hannah ivan julia
+
+--- Mom's Output ---
+Mom: waiting for 10 kids on port 1234...
+Mom: kid 0 connected
+Mom: kid 1 connected
+Mom: kid 2 connected
+Mom: kid 3 connected
+Mom: kid 4 connected
+Mom: kid 5 connected
+Mom: kid 6 connected
+Mom: kid 7 connected
+Mom: kid 8 connected
+Mom: kid 9 connected
+Mom: kid 0 says HELLO, name=alice
+Mom: kid 1 says HELLO, name=bob
+Mom: kid 2 says HELLO, name=charlie
+Mom: kid 3 says HELLO, name=diana
+Mom: kid 4 says HELLO, name=edward
+Mom: kid 5 says HELLO, name=george
+Mom: kid 6 says HELLO, name=hannah
+Mom: kid 7 says HELLO, name=ivan
+Mom: kid 8 says HELLO, name=julia
+Mom: kid 9 says HELLO, name=fiona
+
+=== New Round: 10 kids, 9 chairs ===
+Mom -> alice: GETUP 9
+Mom -> bob: GETUP 9
+Mom -> charlie: GETUP 9
+Mom -> diana: GETUP 9
+Mom -> edward: GETUP 9
+Mom -> george: GETUP 9
+Mom -> hannah: GETUP 9
+Mom -> ivan: GETUP 9
+Mom -> julia: GETUP 9
+Mom -> fiona: GETUP 9
+Mom -> alice: SIT
+Mom -> bob: SIT
+Mom -> charlie: SIT
+Mom -> diana: SIT
+Mom -> edward: SIT
+Mom -> george: SIT
+Mom -> hannah: SIT
+Mom -> ivan: SIT
+Mom -> julia: SIT
+Mom -> fiona: SIT
+Mom <- alice: WANT 7
+Mom -> alice: ACK
+Mom <- bob: WANT 7
+Mom -> bob: NACK 111111101
+Mom <- charlie: WANT 7
+Mom -> charlie: NACK 111111101
+Mom <- diana: WANT 7
+Mom -> diana: NACK 111111101
+Mom <- edward: WANT 7
+Mom -> edward: NACK 111111101
+Mom <- bob: WANT 0
+Mom -> bob: ACK
+Mom <- charlie: WANT 0
+Mom -> charlie: NACK 011111101
+Mom <- diana: WANT 0
+Mom -> diana: NACK 011111101
+Mom <- edward: WANT 0
+Mom -> edward: NACK 011111101
+Mom <- george: WANT 7
+Mom -> george: NACK 011111101
+Mom <- hannah: WANT 7
+Mom -> hannah: NACK 011111101
+Mom <- ivan: WANT 7
+Mom -> ivan: NACK 011111101
+Mom <- julia: WANT 7
+Mom -> julia: NACK 011111101
+Mom <- fiona: WANT 7
+Mom -> fiona: NACK 011111101
+Mom <- charlie: WANT 1
+Mom -> charlie: ACK
+Mom <- diana: WANT 1
+Mom -> diana: NACK 001111101
+Mom <- edward: WANT 1
+Mom -> edward: NACK 001111101
+Mom <- george: WANT 1
+Mom -> george: NACK 001111101
+Mom <- hannah: WANT 1
+Mom -> hannah: NACK 001111101
+Mom <- ivan: WANT 1
+Mom -> ivan: NACK 001111101
+Mom <- julia: WANT 1
+Mom -> julia: NACK 001111101
+Mom <- fiona: WANT 1
+Mom -> fiona: NACK 001111101
+Mom <- diana: WANT 2
+Mom -> diana: ACK
+Mom <- edward: WANT 2
+Mom -> edward: NACK 000111101
+Mom <- george: WANT 2
+Mom -> george: NACK 000111101
+Mom <- hannah: WANT 2
+Mom -> hannah: NACK 000111101
+Mom <- ivan: WANT 2
+Mom -> ivan: NACK 000111101
+Mom <- julia: WANT 2
+Mom -> julia: NACK 000111101
+Mom <- fiona: WANT 2
+Mom -> fiona: NACK 000111101
+Mom <- edward: WANT 3
+Mom -> edward: ACK
+Mom <- george: WANT 3
+Mom -> george: NACK 000011101
+Mom <- hannah: WANT 3
+Mom -> hannah: NACK 000011101
+Mom <- ivan: WANT 3
+Mom -> ivan: NACK 000011101
+Mom <- george: WANT 4
+Mom -> george: ACK
+Mom <- hannah: WANT 4
+Mom -> hannah: NACK 000001101
+Mom <- ivan: WANT 4
+Mom -> ivan: NACK 000001101
+Mom <- julia: WANT 3
+Mom -> julia: NACK 000001101
+Mom <- fiona: WANT 3
+Mom -> fiona: NACK 000001101
+Mom <- hannah: WANT 5
+Mom -> hannah: ACK
+Mom <- ivan: WANT 5
+Mom -> ivan: NACK 000000101
+Mom <- julia: WANT 5
+Mom -> julia: NACK 000000101
+Mom <- fiona: WANT 5
+Mom -> fiona: NACK 000000101
+Mom <- ivan: WANT 6
+Mom -> ivan: ACK
+Mom <- julia: WANT 6
+Mom -> julia: NACK 000000001
+Mom <- fiona: WANT 6
+Mom -> fiona: NACK 000000001
+Mom <- julia: WANT 8
+Mom -> julia: ACK
+Mom <- fiona: WANT 8
+Mom -> fiona: QUIT
+
+=== New Round: 9 kids, 8 chairs ===
+Mom -> alice: GETUP 8
+Mom -> bob: GETUP 8
+Mom -> charlie: GETUP 8
+Mom -> diana: GETUP 8
+Mom -> edward: GETUP 8
+Mom -> george: GETUP 8
+Mom -> hannah: GETUP 8
+Mom -> ivan: GETUP 8
+Mom -> julia: GETUP 8
+Mom -> alice: SIT
+Mom -> bob: SIT
+Mom -> charlie: SIT
+Mom -> diana: SIT
+Mom -> edward: SIT
+Mom -> george: SIT
+Mom -> hannah: SIT
+Mom -> ivan: SIT
+Mom -> julia: SIT
+Mom <- alice: WANT 3
+Mom -> alice: ACK
+Mom <- bob: WANT 3
+Mom -> bob: NACK 11101111
+Mom <- charlie: WANT 3
+Mom -> charlie: NACK 11101111
+Mom <- bob: WANT 0
+Mom -> bob: ACK
+Mom <- charlie: WANT 0
+Mom -> charlie: NACK 01101111
+Mom <- diana: WANT 3
+Mom -> diana: NACK 01101111
+Mom <- edward: WANT 3
+Mom -> edward: NACK 01101111
+Mom <- george: WANT 3
+Mom -> george: NACK 01101111
+Mom <- hannah: WANT 3
+Mom -> hannah: NACK 01101111
+Mom <- ivan: WANT 3
+Mom -> ivan: NACK 01101111
+Mom <- julia: WANT 3
+Mom -> julia: NACK 01101111
+Mom <- charlie: WANT 1
+Mom -> charlie: ACK
+Mom <- diana: WANT 1
+Mom -> diana: NACK 00101111
+Mom <- edward: WANT 1
+Mom -> edward: NACK 00101111
+Mom <- george: WANT 1
+Mom -> george: NACK 00101111
+Mom <- hannah: WANT 1
+Mom -> hannah: NACK 00101111
+Mom <- ivan: WANT 1
+Mom -> ivan: NACK 00101111
+Mom <- julia: WANT 1
+Mom -> julia: NACK 00101111
+Mom <- diana: WANT 2
+Mom -> diana: ACK
+Mom <- edward: WANT 2
+Mom -> edward: NACK 00001111
+Mom <- george: WANT 2
+Mom -> george: NACK 00001111
+Mom <- edward: WANT 4
+Mom -> edward: ACK
+Mom <- george: WANT 4
+Mom -> george: NACK 00000111
+Mom <- hannah: WANT 2
+Mom -> hannah: NACK 00000111
+Mom <- ivan: WANT 2
+Mom -> ivan: NACK 00000111
+Mom <- julia: WANT 2
+Mom -> julia: NACK 00000111
+Mom <- george: WANT 5
+Mom -> george: ACK
+Mom <- hannah: WANT 5
+Mom -> hannah: NACK 00000011
+Mom <- ivan: WANT 5
+Mom -> ivan: NACK 00000011
+Mom <- julia: WANT 5
+Mom -> julia: NACK 00000011
+Mom <- hannah: WANT 6
+Mom -> hannah: ACK
+Mom <- julia: WANT 6
+Mom -> julia: NACK 00000001
+Mom <- ivan: WANT 6
+Mom -> ivan: NACK 00000001
+Mom <- julia: WANT 7
+Mom -> julia: ACK
+Mom <- ivan: WANT 7
+Mom -> ivan: QUIT
+
+=== New Round: 8 kids, 7 chairs ===
+Mom -> alice: GETUP 7
+Mom -> bob: GETUP 7
+Mom -> charlie: GETUP 7
+Mom -> diana: GETUP 7
+Mom -> edward: GETUP 7
+Mom -> george: GETUP 7
+Mom -> hannah: GETUP 7
+Mom -> julia: GETUP 7
+Mom -> alice: SIT
+Mom -> bob: SIT
+Mom -> charlie: SIT
+Mom -> diana: SIT
+Mom -> edward: SIT
+Mom -> george: SIT
+Mom -> hannah: SIT
+Mom -> julia: SIT
+Mom <- alice: WANT 3
+Mom -> alice: ACK
+Mom <- bob: WANT 3
+Mom -> bob: NACK 1110111
+Mom <- charlie: WANT 3
+Mom -> charlie: NACK 1110111
+Mom <- bob: WANT 0
+Mom -> bob: ACK
+Mom <- diana: WANT 3
+Mom -> diana: NACK 0110111
+Mom <- edward: WANT 3
+Mom -> edward: NACK 0110111
+Mom <- george: WANT 3
+Mom -> george: NACK 0110111
+Mom <- hannah: WANT 3
+Mom -> hannah: NACK 0110111
+Mom <- julia: WANT 3
+Mom -> julia: NACK 0110111
+Mom <- charlie: WANT 0
+Mom -> charlie: NACK 0110111
+Mom <- diana: WANT 1
+Mom -> diana: ACK
+Mom <- edward: WANT 1
+Mom -> edward: NACK 0010111
+Mom <- george: WANT 1
+Mom -> george: NACK 0010111
+Mom <- hannah: WANT 1
+Mom -> hannah: NACK 0010111
+Mom <- julia: WANT 1
+Mom -> julia: NACK 0010111
+Mom <- charlie: WANT 1
+Mom -> charlie: NACK 0010111
+Mom <- edward: WANT 2
+Mom -> edward: ACK
+Mom <- george: WANT 2
+Mom -> george: NACK 0000111
+Mom <- hannah: WANT 2
+Mom -> hannah: NACK 0000111
+Mom <- charlie: WANT 2
+Mom -> charlie: NACK 0000111
+Mom <- george: WANT 4
+Mom -> george: ACK
+Mom <- hannah: WANT 4
+Mom -> hannah: NACK 0000011
+Mom <- julia: WANT 2
+Mom -> julia: NACK 0000011
+Mom <- charlie: WANT 4
+Mom -> charlie: NACK 0000011
+Mom <- hannah: WANT 5
+Mom -> hannah: ACK
+Mom <- julia: WANT 5
+Mom -> julia: NACK 0000001
+Mom <- charlie: WANT 5
+Mom -> charlie: NACK 0000001
+Mom <- charlie: WANT 6
+Mom -> charlie: ACK
+Mom <- julia: WANT 6
+Mom -> julia: QUIT
+
+=== New Round: 7 kids, 6 chairs ===
+Mom -> alice: GETUP 6
+Mom -> bob: GETUP 6
+Mom -> charlie: GETUP 6
+Mom -> diana: GETUP 6
+Mom -> edward: GETUP 6
+Mom -> george: GETUP 6
+Mom -> hannah: GETUP 6
+Mom -> alice: SIT
+Mom -> bob: SIT
+Mom -> charlie: SIT
+Mom -> diana: SIT
+Mom -> edward: SIT
+Mom -> george: SIT
+Mom -> hannah: SIT
+Mom <- alice: WANT 0
+Mom -> alice: ACK
+Mom <- bob: WANT 0
+Mom -> bob: NACK 011111
+Mom <- charlie: WANT 0
+Mom -> charlie: NACK 011111
+Mom <- diana: WANT 0
+Mom -> diana: NACK 011111
+Mom <- bob: WANT 1
+Mom -> bob: ACK
+Mom <- charlie: WANT 1
+Mom -> charlie: NACK 001111
+Mom <- diana: WANT 1
+Mom -> diana: NACK 001111
+Mom <- edward: WANT 0
+Mom -> edward: NACK 001111
+Mom <- george: WANT 0
+Mom -> george: NACK 001111
+Mom <- charlie: WANT 2
+Mom -> charlie: ACK
+Mom <- hannah: WANT 0
+Mom -> hannah: NACK 000111
+Mom <- diana: WANT 2
+Mom -> diana: NACK 000111
+Mom <- edward: WANT 2
+Mom -> edward: NACK 000111
+Mom <- diana: WANT 3
+Mom -> diana: ACK
+Mom <- edward: WANT 3
+Mom -> edward: NACK 000011
+Mom <- george: WANT 2
+Mom -> george: NACK 000011
+Mom <- hannah: WANT 3
+Mom -> hannah: NACK 000011
+Mom <- edward: WANT 4
+Mom -> edward: ACK
+Mom <- george: WANT 4
+Mom -> george: NACK 000001
+Mom <- hannah: WANT 4
+Mom -> hannah: NACK 000001
+Mom <- george: WANT 5
+Mom -> george: ACK
+Mom <- hannah: WANT 5
+Mom -> hannah: QUIT
+
+=== New Round: 6 kids, 5 chairs ===
+Mom -> alice: GETUP 5
+Mom -> bob: GETUP 5
+Mom -> charlie: GETUP 5
+Mom -> diana: GETUP 5
+Mom -> edward: GETUP 5
+Mom -> george: GETUP 5
+Mom -> alice: SIT
+Mom -> bob: SIT
+Mom -> charlie: SIT
+Mom -> diana: SIT
+Mom -> edward: SIT
+Mom -> george: SIT
+Mom <- alice: WANT 1
+Mom -> alice: ACK
+Mom <- bob: WANT 1
+Mom -> bob: NACK 10111
+Mom <- charlie: WANT 1
+Mom -> charlie: NACK 10111
+Mom <- bob: WANT 0
+Mom -> bob: ACK
+Mom <- charlie: WANT 0
+Mom -> charlie: NACK 00111
+Mom <- diana: WANT 1
+Mom -> diana: NACK 00111
+Mom <- edward: WANT 1
+Mom -> edward: NACK 00111
+Mom <- george: WANT 1
+Mom -> george: NACK 00111
+Mom <- charlie: WANT 2
+Mom -> charlie: ACK
+Mom <- diana: WANT 2
+Mom -> diana: NACK 00011
+Mom <- edward: WANT 2
+Mom -> edward: NACK 00011
+Mom <- george: WANT 2
+Mom -> george: NACK 00011
+Mom <- diana: WANT 3
+Mom -> diana: ACK
+Mom <- edward: WANT 3
+Mom -> edward: NACK 00001
+Mom <- george: WANT 3
+Mom -> george: NACK 00001
+Mom <- edward: WANT 4
+Mom -> edward: ACK
+Mom <- george: WANT 4
+Mom -> george: QUIT
+
+=== New Round: 5 kids, 4 chairs ===
+Mom -> alice: GETUP 4
+Mom -> bob: GETUP 4
+Mom -> charlie: GETUP 4
+Mom -> diana: GETUP 4
+Mom -> edward: GETUP 4
+Mom -> alice: SIT
+Mom -> bob: SIT
+Mom -> charlie: SIT
+Mom -> diana: SIT
+Mom -> edward: SIT
+Mom <- alice: WANT 3
+Mom -> alice: ACK
+Mom <- bob: WANT 3
+Mom -> bob: NACK 1110
+Mom <- charlie: WANT 3
+Mom -> charlie: NACK 1110
+Mom <- diana: WANT 3
+Mom -> diana: NACK 1110
+Mom <- edward: WANT 3
+Mom -> edward: NACK 1110
+Mom <- bob: WANT 0
+Mom -> bob: ACK
+Mom <- charlie: WANT 0
+Mom -> charlie: NACK 0110
+Mom <- diana: WANT 0
+Mom -> diana: NACK 0110
+Mom <- edward: WANT 0
+Mom -> edward: NACK 0110
+Mom <- charlie: WANT 1
+Mom -> charlie: ACK
+Mom <- diana: WANT 1
+Mom -> diana: NACK 0010
+Mom <- edward: WANT 1
+Mom -> edward: NACK 0010
+Mom <- edward: WANT 2
+Mom -> edward: ACK
+Mom <- diana: WANT 2
+Mom -> diana: QUIT
+
+=== New Round: 4 kids, 3 chairs ===
+Mom -> alice: GETUP 3
+Mom -> bob: GETUP 3
+Mom -> charlie: GETUP 3
+Mom -> edward: GETUP 3
+Mom -> alice: SIT
+Mom -> bob: SIT
+Mom -> charlie: SIT
+Mom -> edward: SIT
+Mom <- alice: WANT 1
+Mom -> alice: ACK
+Mom <- bob: WANT 1
+Mom -> bob: NACK 101
+Mom <- charlie: WANT 1
+Mom -> charlie: NACK 101
+Mom <- edward: WANT 1
+Mom -> edward: NACK 101
+Mom <- bob: WANT 0
+Mom -> bob: ACK
+Mom <- charlie: WANT 0
+Mom -> charlie: NACK 001
+Mom <- edward: WANT 0
+Mom -> edward: NACK 001
+Mom <- charlie: WANT 2
+Mom -> charlie: ACK
+Mom <- edward: WANT 2
+Mom -> edward: QUIT
+
+=== New Round: 3 kids, 2 chairs ===
+Mom -> alice: GETUP 2
+Mom -> bob: GETUP 2
+Mom -> charlie: GETUP 2
+Mom -> alice: SIT
+Mom -> bob: SIT
+Mom -> charlie: SIT
+Mom <- alice: WANT 0
+Mom -> alice: ACK
+Mom <- bob: WANT 0
+Mom -> bob: NACK 01
+Mom <- charlie: WANT 0
+Mom -> charlie: NACK 01
+Mom <- bob: WANT 1
+Mom -> bob: ACK
+Mom <- charlie: WANT 1
+Mom -> charlie: QUIT
+
+=== New Round: 2 kids, 1 chairs ===
+Mom -> alice: GETUP 1
+Mom -> bob: GETUP 1
+Mom -> alice: SIT
+Mom -> bob: SIT
+Mom <- alice: WANT 0
+Mom -> alice: ACK
+Mom <- bob: WANT 0
+Mom -> bob: QUIT
+Mom -> alice: PRIZE
+Mom: game over
+
+-------------------------------
+
+
+===============================
+  POST-TEST VERIFICATION
+===============================
+
+HELLO messages:  13
+GETUP messages:  64
+SIT messages:    64
+WANT messages:   194
+ACK messages:    51
+NACK messages:   132
+QUIT messages:   13
+PRIZE messages:  3
+
+Deadlock timeouts: 0
+Winners announced: 1
+
+All tests passed without deadlock.

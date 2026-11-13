@@ -1,0 +1,1086 @@
+=== Test 1: No arguments (usage) ===
+Command: ./musicalChairs
+
+Usage: ./musicalChairs numKids
+*** Exit status: 1 ***
+
+-------------------------------
+
+=== Test 2: 0 kids (error) ===
+Command: ./musicalChairs 0
+
+Error: need at least 2 kids
+*** Exit status: 1 ***
+
+-------------------------------
+
+=== Test 3: 1 kid (error) ===
+Command: ./musicalChairs 1
+
+Error: need at least 2 kids
+*** Exit status: 1 ***
+
+-------------------------------
+
+=== Test 4: 2 kids (minimum game) ===
+Command: ./musicalChairs 2
+
+=================================
+  Musical Chairs: 2 players
+=================================
+Model: 1 chairs allocated
+Mom: creating 2 kids
+  Kid 0: thread created, tid=123274893719104
+  Kid 0: ready to play
+  Kid 1: thread created, tid=123274885326400
+  Kid 1: ready to play
+
+==============================
+  Round: 2 kids, 1 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 1
+  Kid 1: received SIGUSR1
+  Kid 1: marching, wants chair 0
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 0
+Mom: all 2 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 1
+  Kid 0: received SIGUSR2
+  Kid 1: received SIGUSR2
+  Kid 1: sat in chair 0
+  Kid 0: no chair, eliminated!
+  Kid 0: thread exiting
+Mom: all kids responded
+Mom: Kid 0 is OUT!
+Mom: 0 chairs remain
+
+=================================
+  WINNER: Kid 1 gets the prize!
+=================================
+Mom: sending SIGQUIT to winner
+  Kid 1: received SIGQUIT
+  Kid 1: going home
+
+Mom: joining all threads...
+Mom: joined Kid 1
+Mom: joined Kid 0
+
+Mom: game over, goodbye!
+Model: destroyed
+
+-------------------------------
+
+=== Test 5: 3 kids ===
+Command: ./musicalChairs 3
+
+=================================
+  Musical Chairs: 3 players
+=================================
+Model: 2 chairs allocated
+Mom: creating 3 kids
+  Kid 0: thread created, tid=134683822126656
+  Kid 0: ready to play
+  Kid 1: thread created, tid=134683813733952
+  Kid 1: ready to play
+  Kid 2: thread created, tid=134683805341248
+  Kid 2: ready to play
+
+==============================
+  Round: 3 kids, 2 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 1
+Mom: SIGUSR1 -> Kid 2
+  Kid 1: received SIGUSR1
+  Kid 1: marching, wants chair 1
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 1
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 0
+Mom: all 3 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 1
+Mom: SIGUSR2 -> Kid 2
+  Kid 1: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 0: received SIGUSR2
+  Kid 2: sat in chair 0
+  Kid 1: sat in chair 1
+  Kid 0: no chair, eliminated!
+  Kid 0: thread exiting
+Mom: all kids responded
+Mom: Kid 0 is OUT!
+Mom: 1 chairs remain
+
+==============================
+  Round: 2 kids, 1 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 1
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 0
+  Kid 1: received SIGUSR1
+  Kid 1: marching, wants chair 0
+Mom: all 2 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 1
+  Kid 1: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 2: sat in chair 0
+  Kid 1: no chair, eliminated!
+  Kid 1: thread exiting
+Mom: all kids responded
+Mom: Kid 1 is OUT!
+Mom: 0 chairs remain
+
+=================================
+  WINNER: Kid 2 gets the prize!
+=================================
+Mom: sending SIGQUIT to winner
+  Kid 2: received SIGQUIT
+  Kid 2: going home
+
+Mom: joining all threads...
+Mom: joined Kid 2
+Mom: joined Kid 1
+Mom: joined Kid 0
+
+Mom: game over, goodbye!
+Model: destroyed
+
+-------------------------------
+
+=== Test 6: 5 kids ===
+Command: ./musicalChairs 5
+
+=================================
+  Musical Chairs: 5 players
+=================================
+Model: 4 chairs allocated
+Mom: creating 5 kids
+  Kid 0: thread created, tid=125457559189056
+  Kid 0: ready to play
+  Kid 1: thread created, tid=125457550796352
+  Kid 1: ready to play
+  Kid 2: thread created, tid=125457542403648
+  Kid 2: ready to play
+  Kid 3: thread created, tid=125457534010944
+  Kid 3: ready to play
+  Kid 4: thread created, tid=125457525618240
+  Kid 4: ready to play
+
+==============================
+  Round: 5 kids, 4 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 1
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 3
+Mom: SIGUSR1 -> Kid 4
+  Kid 1: received SIGUSR1
+  Kid 1: marching, wants chair 3
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 0
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 3
+  Kid 4: received SIGUSR1
+  Kid 4: marching, wants chair 1
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 0
+Mom: all 5 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 1
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 3
+Mom: SIGUSR2 -> Kid 4
+  Kid 1: received SIGUSR2
+  Kid 0: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 4: received SIGUSR2
+  Kid 2: sat in chair 0
+  Kid 0: sat in chair 1
+  Kid 1: sat in chair 3
+  Kid 3: sat in chair 2
+  Kid 4: no chair, eliminated!
+  Kid 4: thread exiting
+Mom: all kids responded
+Mom: Kid 4 is OUT!
+Mom: 3 chairs remain
+
+==============================
+  Round: 4 kids, 3 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 1
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 3
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 1
+  Kid 1: received SIGUSR1
+  Kid 1: marching, wants chair 1
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 2
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 0
+Mom: all 4 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 1
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 3
+  Kid 0: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 1: received SIGUSR2
+  Kid 3: sat in chair 0
+  Kid 2: sat in chair 2
+  Kid 1: sat in chair 1
+  Kid 0: no chair, eliminated!
+  Kid 0: thread exiting
+Mom: all kids responded
+Mom: Kid 0 is OUT!
+Mom: 2 chairs remain
+
+==============================
+  Round: 3 kids, 2 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 3
+Mom: SIGUSR1 -> Kid 1
+Mom: SIGUSR1 -> Kid 2
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 1
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 1
+  Kid 1: received SIGUSR1
+  Kid 1: marching, wants chair 1
+Mom: all 3 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 3
+Mom: SIGUSR2 -> Kid 1
+Mom: SIGUSR2 -> Kid 2
+  Kid 3: received SIGUSR2
+  Kid 1: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 2: sat in chair 1
+  Kid 3: sat in chair 0
+  Kid 1: no chair, eliminated!
+  Kid 1: thread exiting
+Mom: all kids responded
+Mom: Kid 1 is OUT!
+Mom: 1 chairs remain
+
+==============================
+  Round: 2 kids, 1 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 3
+Mom: SIGUSR1 -> Kid 2
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 0
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 0
+Mom: all 2 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 3
+Mom: SIGUSR2 -> Kid 2
+  Kid 3: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 2: sat in chair 0
+  Kid 3: no chair, eliminated!
+  Kid 3: thread exiting
+Mom: all kids responded
+Mom: Kid 3 is OUT!
+Mom: 0 chairs remain
+
+=================================
+  WINNER: Kid 2 gets the prize!
+=================================
+Mom: sending SIGQUIT to winner
+  Kid 2: received SIGQUIT
+  Kid 2: going home
+
+Mom: joining all threads...
+Mom: joined Kid 2
+Mom: joined Kid 3
+Mom: joined Kid 1
+Mom: joined Kid 0
+Mom: joined Kid 4
+
+Mom: game over, goodbye!
+Model: destroyed
+
+-------------------------------
+
+=== Test 7: 7 kids ===
+Command: ./musicalChairs 7
+
+=================================
+  Musical Chairs: 7 players
+=================================
+Model: 6 chairs allocated
+Mom: creating 7 kids
+  Kid 0: thread created, tid=132046722692672
+  Kid 0: ready to play
+  Kid 1: thread created, tid=132046714299968
+  Kid 1: ready to play
+  Kid 2: thread created, tid=132046705907264
+  Kid 2: ready to play
+  Kid 3: thread created, tid=132046697514560
+  Kid 4: thread created, tid=132046689121856
+  Kid 5: thread created, tid=132046680729152
+  Kid 6: thread created, tid=132046672336448
+  Kid 3: ready to play
+  Kid 4: ready to play
+  Kid 6: ready to play
+  Kid 5: ready to play
+
+==============================
+  Round: 7 kids, 6 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 1
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 3
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 5
+Mom: SIGUSR1 -> Kid 4
+Mom: SIGUSR1 -> Kid 5
+Mom: SIGUSR1 -> Kid 6
+  Kid 1: received SIGUSR1
+  Kid 2: received SIGUSR1
+  Kid 1: marching, wants chair 1
+  Kid 2: marching, wants chair 3
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 0
+  Kid 4: received SIGUSR1
+  Kid 4: marching, wants chair 2
+  Kid 5: received SIGUSR1
+  Kid 5: marching, wants chair 0
+  Kid 6: received SIGUSR1
+  Kid 6: marching, wants chair 1
+Mom: all 7 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 1
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 3
+  Kid 0: received SIGUSR2
+Mom: SIGUSR2 -> Kid 4
+Mom: SIGUSR2 -> Kid 5
+Mom: SIGUSR2 -> Kid 6
+  Kid 1: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 4: received SIGUSR2
+  Kid 5: received SIGUSR2
+  Kid 6: received SIGUSR2
+  Kid 3: sat in chair 0
+  Kid 0: sat in chair 5
+  Kid 1: sat in chair 1
+  Kid 5: sat in chair 2
+  Kid 4: sat in chair 3
+  Kid 6: sat in chair 4
+  Kid 2: no chair, eliminated!
+  Kid 2: thread exiting
+Mom: all kids responded
+Mom: Kid 2 is OUT!
+Mom: 5 chairs remain
+
+==============================
+  Round: 6 kids, 5 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 1
+Mom: SIGUSR1 -> Kid 6
+Mom: SIGUSR1 -> Kid 3
+Mom: SIGUSR1 -> Kid 4
+Mom: SIGUSR1 -> Kid 5
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 2
+  Kid 1: received SIGUSR1
+  Kid 1: marching, wants chair 1
+  Kid 6: received SIGUSR1
+  Kid 6: marching, wants chair 1
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 4
+  Kid 4: received SIGUSR1
+  Kid 4: marching, wants chair 2
+  Kid 5: received SIGUSR1
+  Kid 5: marching, wants chair 1
+Mom: all 6 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 1
+Mom: SIGUSR2 -> Kid 6
+Mom: SIGUSR2 -> Kid 3
+Mom: SIGUSR2 -> Kid 4
+Mom: SIGUSR2 -> Kid 5
+  Kid 0: received SIGUSR2
+  Kid 1: received SIGUSR2
+  Kid 6: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 4: received SIGUSR2
+  Kid 5: received SIGUSR2
+  Kid 1: sat in chair 1
+  Kid 5: sat in chair 2
+  Kid 6: sat in chair 3
+  Kid 0: sat in chair 4
+  Kid 3: sat in chair 0
+  Kid 4: no chair, eliminated!
+  Kid 4: thread exiting
+Mom: all kids responded
+Mom: Kid 4 is OUT!
+Mom: 4 chairs remain
+
+==============================
+  Round: 5 kids, 4 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 1
+Mom: SIGUSR1 -> Kid 6
+Mom: SIGUSR1 -> Kid 3
+Mom: SIGUSR1 -> Kid 5
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 2
+  Kid 1: received SIGUSR1
+  Kid 1: marching, wants chair 2
+  Kid 6: received SIGUSR1
+  Kid 6: marching, wants chair 0
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 0
+  Kid 5: received SIGUSR1
+  Kid 5: marching, wants chair 2
+Mom: all 5 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 1
+Mom: SIGUSR2 -> Kid 6
+Mom: SIGUSR2 -> Kid 3
+Mom: SIGUSR2 -> Kid 5
+  Kid 1: received SIGUSR2
+  Kid 0: received SIGUSR2
+  Kid 6: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 5: received SIGUSR2
+  Kid 5: sat in chair 2
+  Kid 0: sat in chair 3
+  Kid 3: sat in chair 0
+  Kid 6: sat in chair 1
+  Kid 1: no chair, eliminated!
+  Kid 1: thread exiting
+Mom: all kids responded
+Mom: Kid 1 is OUT!
+Mom: 3 chairs remain
+
+==============================
+  Round: 4 kids, 3 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 5
+Mom: SIGUSR1 -> Kid 6
+Mom: SIGUSR1 -> Kid 3
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 0
+  Kid 6: received SIGUSR1
+  Kid 6: marching, wants chair 2
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 0
+  Kid 5: received SIGUSR1
+  Kid 5: marching, wants chair 0
+Mom: all 4 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 5
+Mom: SIGUSR2 -> Kid 6
+Mom: SIGUSR2 -> Kid 3
+  Kid 0: received SIGUSR2
+  Kid 5: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 6: received SIGUSR2
+  Kid 3: sat in chair 0
+  Kid 6: sat in chair 2
+  Kid 5: sat in chair 1
+  Kid 0: no chair, eliminated!
+  Kid 0: thread exiting
+Mom: all kids responded
+Mom: Kid 0 is OUT!
+Mom: 2 chairs remain
+
+==============================
+  Round: 3 kids, 2 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 3
+Mom: SIGUSR1 -> Kid 5
+Mom: SIGUSR1 -> Kid 6
+  Kid 6: received SIGUSR1
+  Kid 5: received SIGUSR1
+  Kid 5: marching, wants chair 0
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 0
+  Kid 6: marching, wants chair 0
+Mom: all 3 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 3
+Mom: SIGUSR2 -> Kid 5
+Mom: SIGUSR2 -> Kid 6
+  Kid 3: received SIGUSR2
+  Kid 5: received SIGUSR2
+  Kid 6: received SIGUSR2
+  Kid 5: sat in chair 0
+  Kid 3: sat in chair 1
+  Kid 6: no chair, eliminated!
+  Kid 6: thread exiting
+Mom: all kids responded
+Mom: Kid 6 is OUT!
+Mom: 1 chairs remain
+
+==============================
+  Round: 2 kids, 1 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 3
+Mom: SIGUSR1 -> Kid 5
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 0
+  Kid 5: received SIGUSR1
+  Kid 5: marching, wants chair 0
+Mom: all 2 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 3
+Mom: SIGUSR2 -> Kid 5
+  Kid 5: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 5: sat in chair 0
+  Kid 3: no chair, eliminated!
+  Kid 3: thread exiting
+Mom: all kids responded
+Mom: Kid 3 is OUT!
+Mom: 0 chairs remain
+
+=================================
+  WINNER: Kid 5 gets the prize!
+=================================
+Mom: sending SIGQUIT to winner
+  Kid 5: received SIGQUIT
+  Kid 5: going home
+
+Mom: joining all threads...
+Mom: joined Kid 5
+Mom: joined Kid 3
+Mom: joined Kid 6
+Mom: joined Kid 0
+Mom: joined Kid 1
+Mom: joined Kid 4
+Mom: joined Kid 2
+
+Mom: game over, goodbye!
+Model: destroyed
+
+-------------------------------
+
+=== Test 8: 10 kids (stress) ===
+Command: ./musicalChairs 10
+
+=================================
+  Musical Chairs: 10 players
+=================================
+Model: 9 chairs allocated
+Mom: creating 10 kids
+  Kid 0: thread created, tid=139004970268224
+  Kid 0: ready to play
+  Kid 1: thread created, tid=139004961875520
+  Kid 1: ready to play
+  Kid 2: thread created, tid=139004953482816
+  Kid 2: ready to play
+  Kid 3: thread created, tid=139004945090112
+  Kid 3: ready to play
+  Kid 4: thread created, tid=139004936697408
+  Kid 4: ready to play
+  Kid 5: thread created, tid=139004928304704
+  Kid 5: ready to play
+  Kid 6: thread created, tid=139004919912000
+  Kid 6: ready to play
+  Kid 7: thread created, tid=139004911519296
+  Kid 7: ready to play
+  Kid 8: thread created, tid=139004903126592
+  Kid 8: ready to play
+  Kid 9: thread created, tid=139004894733888
+  Kid 9: ready to play
+
+==============================
+  Round: 10 kids, 9 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 1
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 3
+Mom: SIGUSR1 -> Kid 4
+Mom: SIGUSR1 -> Kid 5
+Mom: SIGUSR1 -> Kid 6
+Mom: SIGUSR1 -> Kid 7
+Mom: SIGUSR1 -> Kid 8
+Mom: SIGUSR1 -> Kid 9
+  Kid 5: received SIGUSR1
+  Kid 5: marching, wants chair 7
+  Kid 6: received SIGUSR1
+  Kid 6: marching, wants chair 5
+  Kid 7: received SIGUSR1
+  Kid 7: marching, wants chair 8
+  Kid 8: received SIGUSR1
+  Kid 8: marching, wants chair 3
+  Kid 9: received SIGUSR1
+  Kid 9: marching, wants chair 8
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 1
+  Kid 1: received SIGUSR1
+  Kid 1: marching, wants chair 0
+  Kid 2: received SIGUSR1
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 7
+  Kid 2: marching, wants chair 7
+  Kid 4: received SIGUSR1
+  Kid 4: marching, wants chair 4
+Mom: all 10 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 1
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 3
+Mom: SIGUSR2 -> Kid 4
+Mom: SIGUSR2 -> Kid 5
+Mom: SIGUSR2 -> Kid 6
+Mom: SIGUSR2 -> Kid 7
+Mom: SIGUSR2 -> Kid 8
+Mom: SIGUSR2 -> Kid 9
+  Kid 5: received SIGUSR2
+  Kid 6: received SIGUSR2
+  Kid 7: received SIGUSR2
+  Kid 8: received SIGUSR2
+  Kid 9: received SIGUSR2
+  Kid 0: received SIGUSR2
+  Kid 1: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 4: received SIGUSR2
+  Kid 7: sat in chair 8
+  Kid 2: sat in chair 7
+  Kid 5: sat in chair 0
+  Kid 4: sat in chair 4
+  Kid 9: sat in chair 1
+  Kid 8: sat in chair 3
+  Kid 6: sat in chair 5
+  Kid 0: sat in chair 2
+  Kid 3: sat in chair 6
+  Kid 1: no chair, eliminated!
+  Kid 1: thread exiting
+Mom: all kids responded
+Mom: Kid 1 is OUT!
+Mom: 8 chairs remain
+
+==============================
+  Round: 9 kids, 8 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 9
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 3
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 3
+Mom: SIGUSR1 -> Kid 4
+Mom: SIGUSR1 -> Kid 5
+Mom: SIGUSR1 -> Kid 6
+Mom: SIGUSR1 -> Kid 7
+Mom: SIGUSR1 -> Kid 8
+  Kid 9: received SIGUSR1
+  Kid 9: marching, wants chair 4
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 0
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 7
+  Kid 4: received SIGUSR1
+  Kid 4: marching, wants chair 6
+  Kid 5: received SIGUSR1
+  Kid 5: marching, wants chair 2
+  Kid 6: received SIGUSR1
+  Kid 6: marching, wants chair 7
+  Kid 7: received SIGUSR1
+  Kid 7: marching, wants chair 4
+  Kid 8: received SIGUSR1
+  Kid 8: marching, wants chair 3
+Mom: all 9 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 9
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 3
+Mom: SIGUSR2 -> Kid 4
+Mom: SIGUSR2 -> Kid 5
+Mom: SIGUSR2 -> Kid 6
+Mom: SIGUSR2 -> Kid 7
+Mom: SIGUSR2 -> Kid 8
+  Kid 9: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 0: received SIGUSR2
+  Kid 4: received SIGUSR2
+  Kid 7: received SIGUSR2
+  Kid 5: received SIGUSR2
+  Kid 8: received SIGUSR2
+  Kid 6: received SIGUSR2
+  Kid 9: sat in chair 4
+  Kid 4: sat in chair 6
+  Kid 3: sat in chair 7
+  Kid 7: sat in chair 5
+  Kid 8: sat in chair 3
+  Kid 6: sat in chair 0
+  Kid 0: sat in chair 1
+  Kid 2: sat in chair 2
+  Kid 5: no chair, eliminated!
+  Kid 5: thread exiting
+Mom: all kids responded
+Mom: Kid 5 is OUT!
+Mom: 7 chairs remain
+
+==============================
+  Round: 8 kids, 7 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 0
+Mom: SIGUSR1 -> Kid 9
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 3
+  Kid 0: received SIGUSR1
+  Kid 0: marching, wants chair 4
+Mom: SIGUSR1 -> Kid 4
+  Kid 9: received SIGUSR1
+  Kid 9: marching, wants chair 4
+Mom: SIGUSR1 -> Kid 8
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 3
+Mom: SIGUSR1 -> Kid 6
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 6
+Mom: SIGUSR1 -> Kid 7
+  Kid 8: received SIGUSR1
+  Kid 8: marching, wants chair 4
+  Kid 4: received SIGUSR1
+  Kid 4: marching, wants chair 0
+  Kid 6: received SIGUSR1
+  Kid 6: marching, wants chair 5
+  Kid 7: received SIGUSR1
+  Kid 7: marching, wants chair 1
+Mom: all 8 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 0
+Mom: SIGUSR2 -> Kid 9
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 3
+  Kid 0: received SIGUSR2
+Mom: SIGUSR2 -> Kid 4
+  Kid 9: received SIGUSR2
+Mom: SIGUSR2 -> Kid 8
+  Kid 2: received SIGUSR2
+Mom: SIGUSR2 -> Kid 6
+  Kid 3: received SIGUSR2
+Mom: SIGUSR2 -> Kid 7
+  Kid 4: received SIGUSR2
+  Kid 6: received SIGUSR2
+  Kid 8: received SIGUSR2
+  Kid 7: received SIGUSR2
+  Kid 9: sat in chair 4
+  Kid 6: sat in chair 5
+  Kid 8: sat in chair 6
+  Kid 7: sat in chair 1
+  Kid 4: sat in chair 0
+  Kid 3: sat in chair 2
+  Kid 2: sat in chair 3
+  Kid 0: no chair, eliminated!
+  Kid 0: thread exiting
+Mom: all kids responded
+Mom: Kid 0 is OUT!
+Mom: 6 chairs remain
+
+==============================
+  Round: 7 kids, 6 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 7
+Mom: SIGUSR1 -> Kid 9
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 3
+  Kid 7: received SIGUSR1
+  Kid 7: marching, wants chair 2
+Mom: SIGUSR1 -> Kid 4
+  Kid 9: received SIGUSR1
+  Kid 9: marching, wants chair 4
+Mom: SIGUSR1 -> Kid 8
+Mom: SIGUSR1 -> Kid 6
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 2
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 3
+  Kid 8: received SIGUSR1
+  Kid 8: marching, wants chair 1
+  Kid 4: received SIGUSR1
+  Kid 4: marching, wants chair 5
+  Kid 6: received SIGUSR1
+  Kid 6: marching, wants chair 5
+Mom: all 7 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 7
+Mom: SIGUSR2 -> Kid 9
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 3
+Mom: SIGUSR2 -> Kid 4
+Mom: SIGUSR2 -> Kid 8
+Mom: SIGUSR2 -> Kid 6
+  Kid 7: received SIGUSR2
+  Kid 9: received SIGUSR2
+  Kid 6: received SIGUSR2
+  Kid 8: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 4: received SIGUSR2
+  Kid 8: sat in chair 1
+  Kid 9: sat in chair 4
+  Kid 6: sat in chair 5
+  Kid 2: sat in chair 3
+  Kid 4: sat in chair 0
+  Kid 3: sat in chair 2
+  Kid 7: no chair, eliminated!
+  Kid 7: thread exiting
+Mom: all kids responded
+Mom: Kid 7 is OUT!
+Mom: 5 chairs remain
+
+==============================
+  Round: 6 kids, 5 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 6
+Mom: SIGUSR1 -> Kid 9
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 3
+Mom: SIGUSR1 -> Kid 4
+Mom: SIGUSR1 -> Kid 8
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 1
+  Kid 6: received SIGUSR1
+  Kid 6: marching, wants chair 1
+  Kid 3: received SIGUSR1
+  Kid 3: marching, wants chair 0
+  Kid 8: received SIGUSR1
+  Kid 8: marching, wants chair 3
+  Kid 9: received SIGUSR1
+  Kid 9: marching, wants chair 0
+  Kid 4: received SIGUSR1
+  Kid 4: marching, wants chair 1
+Mom: all 6 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 6
+Mom: SIGUSR2 -> Kid 9
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 3
+  Kid 6: received SIGUSR2
+Mom: SIGUSR2 -> Kid 4
+  Kid 9: received SIGUSR2
+Mom: SIGUSR2 -> Kid 8
+  Kid 2: received SIGUSR2
+  Kid 3: received SIGUSR2
+  Kid 8: received SIGUSR2
+  Kid 4: received SIGUSR2
+  Kid 6: sat in chair 1
+  Kid 4: sat in chair 2
+  Kid 9: sat in chair 0
+  Kid 2: sat in chair 3
+  Kid 8: sat in chair 4
+  Kid 3: no chair, eliminated!
+  Kid 3: thread exiting
+Mom: all kids responded
+Mom: Kid 3 is OUT!
+Mom: 4 chairs remain
+
+==============================
+  Round: 5 kids, 4 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 6
+Mom: SIGUSR1 -> Kid 9
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 8
+Mom: SIGUSR1 -> Kid 4
+  Kid 9: received SIGUSR1
+  Kid 9: marching, wants chair 3
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 2
+  Kid 8: received SIGUSR1
+  Kid 8: marching, wants chair 0
+  Kid 4: received SIGUSR1
+  Kid 4: marching, wants chair 1
+  Kid 6: received SIGUSR1
+  Kid 6: marching, wants chair 1
+Mom: all 5 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 6
+Mom: SIGUSR2 -> Kid 9
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 8
+Mom: SIGUSR2 -> Kid 4
+  Kid 9: received SIGUSR2
+  Kid 6: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 4: received SIGUSR2
+  Kid 8: received SIGUSR2
+  Kid 8: sat in chair 0
+  Kid 9: sat in chair 3
+  Kid 2: sat in chair 2
+  Kid 4: sat in chair 1
+  Kid 6: no chair, eliminated!
+  Kid 6: thread exiting
+Mom: all kids responded
+Mom: Kid 6 is OUT!
+Mom: 3 chairs remain
+
+==============================
+  Round: 4 kids, 3 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 4
+Mom: SIGUSR1 -> Kid 9
+Mom: SIGUSR1 -> Kid 2
+Mom: SIGUSR1 -> Kid 8
+  Kid 9: received SIGUSR1
+  Kid 9: marching, wants chair 0
+  Kid 4: received SIGUSR1
+  Kid 4: marching, wants chair 1
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 1
+  Kid 8: received SIGUSR1
+  Kid 8: marching, wants chair 2
+Mom: all 4 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 4
+Mom: SIGUSR2 -> Kid 9
+Mom: SIGUSR2 -> Kid 2
+Mom: SIGUSR2 -> Kid 8
+  Kid 4: received SIGUSR2
+  Kid 9: received SIGUSR2
+  Kid 8: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 2: sat in chair 1
+  Kid 9: sat in chair 0
+  Kid 8: sat in chair 2
+  Kid 4: no chair, eliminated!
+  Kid 4: thread exiting
+Mom: all kids responded
+Mom: Kid 4 is OUT!
+Mom: 2 chairs remain
+
+==============================
+  Round: 3 kids, 2 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 8
+Mom: SIGUSR1 -> Kid 9
+Mom: SIGUSR1 -> Kid 2
+  Kid 8: received SIGUSR1
+  Kid 8: marching, wants chair 1
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 1
+  Kid 9: received SIGUSR1
+  Kid 9: marching, wants chair 0
+Mom: all 3 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 8
+Mom: SIGUSR2 -> Kid 9
+Mom: SIGUSR2 -> Kid 2
+  Kid 8: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 9: received SIGUSR2
+  Kid 8: sat in chair 1
+  Kid 2: sat in chair 0
+  Kid 9: no chair, eliminated!
+  Kid 9: thread exiting
+Mom: all kids responded
+Mom: Kid 9 is OUT!
+Mom: 1 chairs remain
+
+==============================
+  Round: 2 kids, 1 chairs
+==============================
+Mom: telling kids to march
+Mom: SIGUSR1 -> Kid 8
+Mom: SIGUSR1 -> Kid 2
+  Kid 8: received SIGUSR1
+  Kid 8: marching, wants chair 0
+  Kid 2: received SIGUSR1
+  Kid 2: marching, wants chair 0
+Mom: all 2 kids marching
+Mom: MUSIC STOPS!
+Mom: SIGUSR2 -> Kid 8
+Mom: SIGUSR2 -> Kid 2
+  Kid 8: received SIGUSR2
+  Kid 2: received SIGUSR2
+  Kid 2: sat in chair 0
+  Kid 8: no chair, eliminated!
+  Kid 8: thread exiting
+Mom: all kids responded
+Mom: Kid 8 is OUT!
+Mom: 0 chairs remain
+
+=================================
+  WINNER: Kid 2 gets the prize!
+=================================
+Mom: sending SIGQUIT to winner
+  Kid 2: received SIGQUIT
+  Kid 2: going home
+
+Mom: joining all threads...
+Mom: joined Kid 2
+Mom: joined Kid 8
+Mom: joined Kid 9
+Mom: joined Kid 4
+Mom: joined Kid 6
+Mom: joined Kid 3
+Mom: joined Kid 7
+Mom: joined Kid 0
+Mom: joined Kid 5
+Mom: joined Kid 1
+
+Mom: game over, goodbye!
+Model: destroyed
+
+-------------------------------
+
+
+===============================
+  POST-TEST VERIFICATION
+===============================
+
+Total winners announced: 5
+Total eliminations: 22
+Deadlock timeouts: 0
+Total thread joins: 27
+Model destructions: 5
+
+All tests passed without deadlock.

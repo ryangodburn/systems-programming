@@ -1,0 +1,683 @@
+=== Directory tree ===
+testdir
+testdir/alpha
+testdir/alpha/deep1
+testdir/alpha/deep1/hardlink_memo.txt
+testdir/alpha/deep1/info.txt
+testdir/alpha/deep1/ten_c.txt
+testdir/alpha/hardlink_root1.txt
+testdir/alpha/link_to_memo.txt
+testdir/alpha/notes.txt
+testdir/alpha/ten_a.txt
+testdir/beta
+testdir/beta/deep2
+testdir/beta/deep2/data.txt
+testdir/beta/deep2/hardlink_notes.txt
+testdir/beta/deep2/link_to_info.txt
+testdir/beta/deep2/medium.bin
+testdir/beta/deep2/root1_copy.txt
+testdir/beta/link_to_notes.txt
+testdir/beta/memo.txt
+testdir/beta/notes_dup.txt
+testdir/beta/ten_b.txt
+testdir/bigfile.bin
+testdir/data_dup.txt
+testdir/root1.txt
+testdir/root2.txt
+
+=== ls -laR of testdir ===
+testdir/:
+total 36
+drwxr-xr-x 4 ryan ryan 4096 Mar 23 16:53 .
+drwxr-xr-x 3 ryan ryan 4096 Mar 23 16:53 ..
+drwxr-xr-x 3 ryan ryan 4096 Mar 23 16:53 alpha
+drwxr-xr-x 3 ryan ryan 4096 Mar 23 16:53 beta
+-rw-r--r-- 1 ryan ryan 5120 Mar 23 16:53 bigfile.bin
+-rw-r--r-- 1 ryan ryan   17 Mar 23 16:53 data_dup.txt
+-rw-r--r-- 2 ryan ryan   16 Mar 23 16:53 root1.txt
+-rw-r--r-- 1 ryan ryan   23 Mar 23 16:53 root2.txt
+
+testdir/alpha:
+total 24
+drwxr-xr-x 3 ryan ryan 4096 Mar 23 16:53 .
+drwxr-xr-x 4 ryan ryan 4096 Mar 23 16:53 ..
+drwxr-xr-x 2 ryan ryan 4096 Mar 23 16:53 deep1
+-rw-r--r-- 2 ryan ryan   16 Mar 23 16:53 hardlink_root1.txt
+lrwxrwxrwx 1 ryan ryan   16 Mar 23 16:53 link_to_memo.txt -> ../beta/memo.txt
+-rw-r--r-- 2 ryan ryan   15 Mar 23 16:53 notes.txt
+-rw-r--r-- 1 ryan ryan   10 Mar 23 16:53 ten_a.txt
+
+testdir/alpha/deep1:
+total 20
+drwxr-xr-x 2 ryan ryan 4096 Mar 23 16:53 .
+drwxr-xr-x 3 ryan ryan 4096 Mar 23 16:53 ..
+-rw-r--r-- 2 ryan ryan   14 Mar 23 16:53 hardlink_memo.txt
+-rw-r--r-- 1 ryan ryan   18 Mar 23 16:53 info.txt
+-rw-r--r-- 1 ryan ryan   10 Mar 23 16:53 ten_c.txt
+
+testdir/beta:
+total 24
+drwxr-xr-x 3 ryan ryan 4096 Mar 23 16:53 .
+drwxr-xr-x 4 ryan ryan 4096 Mar 23 16:53 ..
+drwxr-xr-x 2 ryan ryan 4096 Mar 23 16:53 deep2
+lrwxrwxrwx 1 ryan ryan   18 Mar 23 16:53 link_to_notes.txt -> ../alpha/notes.txt
+-rw-r--r-- 2 ryan ryan   14 Mar 23 16:53 memo.txt
+-rw-r--r-- 1 ryan ryan   15 Mar 23 16:53 notes_dup.txt
+-rw-r--r-- 1 ryan ryan   10 Mar 23 16:53 ten_b.txt
+
+testdir/beta/deep2:
+total 24
+drwxr-xr-x 2 ryan ryan 4096 Mar 23 16:53 .
+drwxr-xr-x 3 ryan ryan 4096 Mar 23 16:53 ..
+-rw-r--r-- 1 ryan ryan   17 Mar 23 16:53 data.txt
+-rw-r--r-- 2 ryan ryan   15 Mar 23 16:53 hardlink_notes.txt
+lrwxrwxrwx 1 ryan ryan   34 Mar 23 16:53 link_to_info.txt -> ../../testdir/alpha/deep1/info.txt
+-rw-r--r-- 1 ryan ryan 1536 Mar 23 16:53 medium.bin
+-rw-r--r-- 1 ryan ryan   16 Mar 23 16:53 root1_copy.txt
+
+=== Test 1: Default run ===
+(findDups on test directory)
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Mon Mar 23 2026	16:53:01
+----------------------------------------------------------------
+Welcome to P5: Eliminating Duplicates
+------- Sweeper Settings -------
+Start at:     /home/ryan/Program5/testdir
+Output file:  (stdout)
+Verbose?      No
+Ignore case?  No
+Min file size: 1
+----------------------------
+
+[DIR] /home/ryan/Program5/testdir
+
+[DIR] /home/ryan/Program5/testdir/beta
+
+[DIR] /home/ryan/Program5/testdir/beta/deep2
+
+[DIR] /home/ryan/Program5/testdir/alpha
+
+[DIR] /home/ryan/Program5/testdir/alpha/deep1
+
+--- File List (17 files) ---
+    Length	     iNode	Pathname
+    ------	     -----	--------
+        10	    350159	/home/ryan/Program5/testdir/alpha/deep1/ten_c.txt
+        10	    350155	/home/ryan/Program5/testdir/alpha/ten_a.txt
+        10	    350156	/home/ryan/Program5/testdir/beta/ten_b.txt
+        14	    350158	/home/ryan/Program5/testdir/alpha/deep1/hardlink_memo.txt
+        14	    350158	/home/ryan/Program5/testdir/beta/memo.txt
+        15	    350157	/home/ryan/Program5/testdir/alpha/notes.txt
+        15	    350157	/home/ryan/Program5/testdir/beta/deep2/hardlink_notes.txt
+        15	    350167	/home/ryan/Program5/testdir/beta/notes_dup.txt
+        16	    350152	/home/ryan/Program5/testdir/alpha/hardlink_root1.txt
+        16	    350166	/home/ryan/Program5/testdir/beta/deep2/root1_copy.txt
+        16	    350152	/home/ryan/Program5/testdir/root1.txt
+        17	    350161	/home/ryan/Program5/testdir/beta/deep2/data.txt
+        17	    350168	/home/ryan/Program5/testdir/data_dup.txt
+        18	    350160	/home/ryan/Program5/testdir/alpha/deep1/info.txt
+        23	    350153	/home/ryan/Program5/testdir/root2.txt
+      1536	    350162	/home/ryan/Program5/testdir/beta/deep2/medium.bin
+      5120	    350154	/home/ryan/Program5/testdir/bigfile.bin
+--- End of File List ---
+
+=====================================
+Pass 1: Checking for shared iNodes (hard links)
+=====================================
+
+  iNode 350152 is shared by 2 files:
+        350152	/home/ryan/Program5/testdir/alpha/hardlink_root1.txt
+        350152	/home/ryan/Program5/testdir/root1.txt
+
+  iNode 350157 is shared by 2 files:
+        350157	/home/ryan/Program5/testdir/alpha/notes.txt
+        350157	/home/ryan/Program5/testdir/beta/deep2/hardlink_notes.txt
+
+  iNode 350158 is shared by 2 files:
+        350158	/home/ryan/Program5/testdir/alpha/deep1/hardlink_memo.txt
+        350158	/home/ryan/Program5/testdir/beta/memo.txt
+
+=====================================
+Pass 2: Checking for identical contents (by length)
+=====================================
+
+  Content match (length 15):
+        350157	/home/ryan/Program5/testdir/alpha/notes.txt
+        350167	/home/ryan/Program5/testdir/beta/notes_dup.txt
+
+  Content match (length 15):
+        350157	/home/ryan/Program5/testdir/beta/deep2/hardlink_notes.txt
+        350167	/home/ryan/Program5/testdir/beta/notes_dup.txt
+
+  Content match (length 16):
+        350152	/home/ryan/Program5/testdir/alpha/hardlink_root1.txt
+        350166	/home/ryan/Program5/testdir/beta/deep2/root1_copy.txt
+
+  Content match (length 16):
+        350166	/home/ryan/Program5/testdir/beta/deep2/root1_copy.txt
+        350152	/home/ryan/Program5/testdir/root1.txt
+
+  Content match (length 17):
+        350161	/home/ryan/Program5/testdir/beta/deep2/data.txt
+        350168	/home/ryan/Program5/testdir/data_dup.txt
+
+=====================================
+End of duplicate report.
+=====================================
+
+Normal termination.
+
+=== Test 2: Verbose ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Mon Mar 23 2026	16:53:01
+----------------------------------------------------------------
+Welcome to P5: Eliminating Duplicates
+------- Sweeper Settings -------
+Start at:     /home/ryan/Program5/testdir
+Output file:  (stdout)
+Verbose?      Yes
+Ignore case?  No
+Min file size: 1
+----------------------------
+
+[DIR] /home/ryan/Program5/testdir
+  DIR     350148  beta
+
+[DIR] /home/ryan/Program5/testdir/beta
+  LINK    350164  link_to_notes.txt
+  REG     350167  notes_dup.txt
+  REG     350158  memo.txt
+  DIR     350151  deep2
+
+[DIR] /home/ryan/Program5/testdir/beta/deep2
+  REG     350162  medium.bin
+  REG     350157  hardlink_notes.txt
+  REG     350161  data.txt
+  REG     350166  root1_copy.txt
+  LINK    350165  link_to_info.txt
+  REG     350156  ten_b.txt
+  REG     350153  root2.txt
+  REG     350154  bigfile.bin
+  REG     350152  root1.txt
+  DIR     350147  alpha
+
+[DIR] /home/ryan/Program5/testdir/alpha
+  REG     350157  notes.txt
+  REG     350152  hardlink_root1.txt
+  LINK    350163  link_to_memo.txt
+  DIR     350150  deep1
+
+[DIR] /home/ryan/Program5/testdir/alpha/deep1
+  REG     350159  ten_c.txt
+  REG     350160  info.txt
+  REG     350158  hardlink_memo.txt
+  REG     350155  ten_a.txt
+  REG     350168  data_dup.txt
+
+--- File List (17 files) ---
+    Length	     iNode	Pathname
+    ------	     -----	--------
+        10	    350159	/home/ryan/Program5/testdir/alpha/deep1/ten_c.txt
+        10	    350155	/home/ryan/Program5/testdir/alpha/ten_a.txt
+        10	    350156	/home/ryan/Program5/testdir/beta/ten_b.txt
+        14	    350158	/home/ryan/Program5/testdir/alpha/deep1/hardlink_memo.txt
+        14	    350158	/home/ryan/Program5/testdir/beta/memo.txt
+        15	    350157	/home/ryan/Program5/testdir/alpha/notes.txt
+        15	    350157	/home/ryan/Program5/testdir/beta/deep2/hardlink_notes.txt
+        15	    350167	/home/ryan/Program5/testdir/beta/notes_dup.txt
+        16	    350152	/home/ryan/Program5/testdir/alpha/hardlink_root1.txt
+        16	    350166	/home/ryan/Program5/testdir/beta/deep2/root1_copy.txt
+        16	    350152	/home/ryan/Program5/testdir/root1.txt
+        17	    350161	/home/ryan/Program5/testdir/beta/deep2/data.txt
+        17	    350168	/home/ryan/Program5/testdir/data_dup.txt
+        18	    350160	/home/ryan/Program5/testdir/alpha/deep1/info.txt
+        23	    350153	/home/ryan/Program5/testdir/root2.txt
+      1536	    350162	/home/ryan/Program5/testdir/beta/deep2/medium.bin
+      5120	    350154	/home/ryan/Program5/testdir/bigfile.bin
+--- End of File List ---
+
+=====================================
+Pass 1: Checking for shared iNodes (hard links)
+=====================================
+
+  iNode 350152 is shared by 2 files:
+        350152	/home/ryan/Program5/testdir/alpha/hardlink_root1.txt
+        350152	/home/ryan/Program5/testdir/root1.txt
+
+  iNode 350157 is shared by 2 files:
+        350157	/home/ryan/Program5/testdir/alpha/notes.txt
+        350157	/home/ryan/Program5/testdir/beta/deep2/hardlink_notes.txt
+
+  iNode 350158 is shared by 2 files:
+        350158	/home/ryan/Program5/testdir/alpha/deep1/hardlink_memo.txt
+        350158	/home/ryan/Program5/testdir/beta/memo.txt
+
+=====================================
+Pass 2: Checking for identical contents (by length)
+=====================================
+
+  Content match (length 15):
+        350157	/home/ryan/Program5/testdir/alpha/notes.txt
+        350167	/home/ryan/Program5/testdir/beta/notes_dup.txt
+
+  Content match (length 15):
+        350157	/home/ryan/Program5/testdir/beta/deep2/hardlink_notes.txt
+        350167	/home/ryan/Program5/testdir/beta/notes_dup.txt
+
+  Content match (length 16):
+        350152	/home/ryan/Program5/testdir/alpha/hardlink_root1.txt
+        350166	/home/ryan/Program5/testdir/beta/deep2/root1_copy.txt
+
+  Content match (length 16):
+        350166	/home/ryan/Program5/testdir/beta/deep2/root1_copy.txt
+        350152	/home/ryan/Program5/testdir/root1.txt
+
+  Content match (length 17):
+        350161	/home/ryan/Program5/testdir/beta/deep2/data.txt
+        350168	/home/ryan/Program5/testdir/data_dup.txt
+
+=====================================
+End of duplicate report.
+=====================================
+
+Normal termination.
+
+=== Test 3: Help flag ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Mon Mar 23 2026	16:53:01
+----------------------------------------------------------------
+Welcome to P5: Eliminating Duplicates
+Usage: sweeper [options]
+
+Options:
+  -v, --verbose       Print names of all files and
+                      directories opened.
+  -h, --help          Display this help message.
+  -o, --output <file> Write output to the named
+                      file.
+  -d <path>           Start searching in the
+                      given directory.
+                      (Default: current directory)
+      --size <n>      Only process files of at
+                      least n bytes.
+      --ignore-case   Ignore case when comparing
+                      file names.
+
+
+=== Test 4: Output file ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Mon Mar 23 2026	16:53:01
+----------------------------------------------------------------
+Welcome to P5: Eliminating Duplicates
+
+Normal termination.
+(Sweeper output in out.txt):
+
+=== Test 5: --size 100 ===
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Mon Mar 23 2026	16:53:01
+----------------------------------------------------------------
+Welcome to P5: Eliminating Duplicates
+------- Sweeper Settings -------
+Start at:     /home/ryan/Program5/testdir
+Output file:  (stdout)
+Verbose?      No
+Ignore case?  No
+Min file size: 100
+----------------------------
+
+[DIR] /home/ryan/Program5/testdir
+
+[DIR] /home/ryan/Program5/testdir/beta
+
+[DIR] /home/ryan/Program5/testdir/beta/deep2
+
+[DIR] /home/ryan/Program5/testdir/alpha
+
+[DIR] /home/ryan/Program5/testdir/alpha/deep1
+
+--- File List (3 files) ---
+    Length	     iNode	Pathname
+    ------	     -----	--------
+      1536	    350162	/home/ryan/Program5/testdir/beta/deep2/medium.bin
+      3369	    350170	/home/ryan/Program5/testdir/out.txt
+      5120	    350154	/home/ryan/Program5/testdir/bigfile.bin
+--- End of File List ---
+
+=====================================
+Pass 1: Checking for shared iNodes (hard links)
+=====================================
+
+  No shared iNodes found.
+
+=====================================
+Pass 2: Checking for identical contents (by length)
+=====================================
+
+  No content-identical duplicates found.
+
+=====================================
+End of duplicate report.
+=====================================
+
+Normal termination.
+
+=== Test 6: Home directory ===
+(Running on $HOME,  truncated to 300 lines)
+
+----------------------------------------------------------------
+	Ryan Godburn / Emily King
+	CSCI 4547 / 6647 Systems Programming
+	Mon Mar 23 2026	16:53:01
+----------------------------------------------------------------
+Welcome to P5: Eliminating Duplicates
+------- Sweeper Settings -------
+Start at:     /home/ryan
+Output file:  (stdout)
+Verbose?      No
+Ignore case?  No
+Min file size: 1
+----------------------------
+
+[DIR] /home/ryan
+
+[DIR] /home/ryan/Program6
+
+[DIR] /home/ryan/Program3
+
+[DIR] /home/ryan/Program3/testdir
+
+[DIR] /home/ryan/Program3/testdir/subdir
+
+[DIR] /home/ryan/Program2
+
+[DIR] /home/ryan/Program2/testdir
+
+[DIR] /home/ryan/Program2/testdir/subdir
+
+[DIR] /home/ryan/Program4
+
+[DIR] /home/ryan/Program4/testdir
+
+[DIR] /home/ryan/Program4/testdir/beta
+
+[DIR] /home/ryan/Program4/testdir/beta/deep2
+
+[DIR] /home/ryan/Program4/testdir/alpha
+
+[DIR] /home/ryan/Program4/testdir/alpha/deep1
+
+[DIR] /home/ryan/CF
+
+[DIR] /home/ryan/CF/L2
+
+[DIR] /home/ryan/.android
+
+[DIR] /home/ryan/.rustup
+
+[DIR] /home/ryan/.rustup/toolchains
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/bin
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/bin/gcc-ld
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/etc
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/libexec
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/etc
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/etc/bash_completion.d
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rustfmt
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/cargo
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/clippy
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/documentation
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/trait-system
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/module-system
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/cargo-and-crates-io
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/ownership-and-lifetimes
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/rustdoc
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/platform-and-target-support
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/control-flow
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/the-compiler
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/macros
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/data-types
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2018/error-handling-and-panics
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2024
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/FontAwesome
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/FontAwesome/css
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/FontAwesome/fonts
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/css
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2015
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/fonts
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-2021
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/rust-next
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/edition-guide/editions
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/static.files
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/test
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/cli
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/time
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/types
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/bench
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/options
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/helpers
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/helpers/metrics
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/stats
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/console
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/test/test_result
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/clone
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/mem
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/future
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/sys_common
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/sys_common/wtf8
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/i16
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/fmt
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/f128
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/f128/consts
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/ascii
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/pat
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/i8
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/primitive
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/net
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/net/socket_addr
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/net/udp
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/net/tcp
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/net/ip_addr
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/prelude
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/prelude/rust_2021
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/prelude/rust_2018
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/prelude/rust_2015
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/prelude/v1
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/prelude/rust_2024
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/default
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/error
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/borrow
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/f16
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/f16/consts
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/path
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/time
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/async_iter
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/bstr
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/option
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/hash
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/hash/random
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/usize
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/hint
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/ffi
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/ffi/c_str
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/ffi/os_str
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/marker
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/backtrace
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/thread
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/thread/scoped
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/thread/spawnhook
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/thread/current
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/thread/local
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/u64
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/iter
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/isize
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/convert
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/ops
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/panicking
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/ptr
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/std_float
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/boxed
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/f32
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/f32/consts
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/i128
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/intrinsics
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/intrinsics/fallback
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/intrinsics/simd
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/intrinsics/mir
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/i32
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/env
+
+[DIR] /home/ryan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/env/consts
+... (truncated) ...
+
